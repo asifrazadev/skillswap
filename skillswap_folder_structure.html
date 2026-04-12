@@ -1,0 +1,72 @@
+
+<style>
+  .tree{font-family:var(--font-mono);font-size:13px;line-height:1.9;padding:1.25rem 1.5rem;color:var(--color-text-secondary)}
+  .tree .root{color:var(--color-text-primary);font-weight:500}
+  .tree .dir{color:var(--color-text-primary)}
+  .tree .file{color:var(--color-text-secondary)}
+  .tree .comment{color:var(--color-text-tertiary);font-style:italic;font-family:var(--font-sans);font-size:12px}
+  .tree .badge{display:inline-block;font-size:10px;font-family:var(--font-sans);font-weight:500;padding:1px 7px;border-radius:4px;margin-left:6px;vertical-align:middle}
+  .badge-key{background:#EEEDFE;color:#3C3489}
+  .badge-auth{background:#E1F5EE;color:#085041}
+  .badge-db{background:#FAEEDA;color:#633806}
+</style>
+<div class="tree">
+  <div><span class="root">skillswap/</span> <span class="comment">→ htdocs/skillswap/</span></div>
+
+  <div style="margin-top:8px"><span class="dir">├── config/</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">db.php</span> <span class="badge badge-db">DB connection</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="file">constants.php</span> <span class="comment">base URL, site name</span></div>
+
+  <div style="margin-top:8px"><span class="dir">├── includes/</span> <span class="comment">shared across all pages</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">header.php</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">footer.php</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">auth_check.php</span> <span class="badge badge-auth">session guard</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="file">functions.php</span> <span class="comment">sanitize, flash msgs</span></div>
+
+  <div style="margin-top:8px"><span class="dir">├── auth/</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">login.php</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">register.php</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="file">logout.php</span></div>
+
+  <div style="margin-top:8px"><span class="dir">├── profile/</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">view.php</span> <span class="comment">?user_id=X</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">edit.php</span> <span class="comment">offer + request skills</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="file">update_skills.php</span> <span class="comment">POST handler</span></div>
+
+  <div style="margin-top:8px"><span class="dir">├── match/</span> <span class="badge badge-key">core feature</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">index.php</span> <span class="comment">runs match engine, lists results</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="file">match_engine.php</span> <span class="badge badge-key">bidirectional SQL</span></div>
+
+  <div style="margin-top:8px"><span class="dir">├── swaps/</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">request.php</span> <span class="comment">send swap request</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">respond.php</span> <span class="comment">accept / decline</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">my_swaps.php</span> <span class="comment">dashboard of all swaps</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="file">complete.php</span> <span class="comment">mark swap done</span></div>
+
+  <div style="margin-top:8px"><span class="dir">├── messages/</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">thread.php</span> <span class="comment">?swap_id=X — private thread view</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="file">send.php</span> <span class="comment">POST — insert new message</span></div>
+
+  <div style="margin-top:8px"><span class="dir">├── ratings/</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">rate.php</span> <span class="comment">submit stars + comment</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="file">update_avg.php</span> <span class="comment">recalculate user avg_rating</span></div>
+
+  <div style="margin-top:8px"><span class="dir">├── admin/</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">index.php</span> <span class="comment">dashboard overview</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">users.php</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">skills.php</span> <span class="comment">manage skill categories</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="file">reports.php</span></div>
+
+  <div style="margin-top:8px"><span class="dir">├── assets/</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="dir">css/</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="file">style.css</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="dir">js/</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">main.js</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="file">match_filter.js</span> <span class="comment">live JS filter on match page</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="dir">img/</span> <span class="comment">avatars, placeholders</span></div>
+
+  <div style="margin-top:8px"><span class="dir">├── database/</span></div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="file">skillswap.sql</span> <span class="badge badge-db">CREATE TABLE scripts</span></div>
+
+  <div style="margin-top:8px">└── <span class="file">index.php</span> <span class="comment">landing / explore page</span></div>
+</div>
