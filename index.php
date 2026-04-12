@@ -133,18 +133,18 @@
     <section id="explore" class="py-24 px-6 relative bg-[#13121A]">
         <div class="max-w-7xl mx-auto text-center mb-16 reveal">
             <h2 class="text-4xl md:text-5xl font-extrabold mb-4">The Community</h2>
-            <p class="text-xl text-gray-400 max-w-2xl mx-auto">See who's swapping right now. (Our dogs are very talented).</p>
+            <p class="text-xl text-gray-400 max-w-2xl mx-auto">See who's swapping right now. (Our humans are very talented).</p>
         </div>
         
         <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
             <!-- Match Card 1 -->
-            <div class="glassmorphism rounded-3xl overflow-hidden cursor-pointer group reveal hover:shadow-[0_10px_40px_rgba(124,58,237,0.2)] transition-shadow duration-500">
+            <div class="glassmorphism rounded-3xl overflow-hidden  group reveal hover:shadow-[0_10px_40px_rgba(124,58,237,0.2)] transition-shadow duration-500">
                 <div class="relative aspect-auto h-64 overflow-hidden">
-                    <img src="assets/img/dog_guitar.png" alt="Dog teaching guitar" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out">
+                    <img src="assets/img/human_guitar.png" alt="Human teaching guitar" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out">
                     <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Trending</div>
                 </div>
                 <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-4 font-heading">Prof. Golden</h3>
+                    <h3 class="text-2xl font-bold mb-4 font-heading">Prof. Michael</h3>
                     <div class="flex flex-col gap-2">
                         <span class="inline-block px-4 py-2 rounded-xl text-sm font-medium bg-purple-600/10 text-purple-300 border border-purple-500/30">Offers: Guitar Classes</span>
                         <span class="inline-block px-4 py-2 rounded-xl text-sm font-medium bg-pink-500/10 text-pink-400 border border-pink-500/30">Wants: Web Dev</span>
@@ -153,13 +153,13 @@
             </div>
 
             <!-- Match Card 2 -->
-            <div class="glassmorphism rounded-3xl overflow-hidden cursor-pointer group reveal hover:shadow-[0_10px_40px_rgba(236,72,153,0.2)] transition-shadow duration-500" style="transition-delay: 200ms;">
+            <div class="glassmorphism rounded-3xl overflow-hidden group reveal hover:shadow-[0_10px_40px_rgba(236,72,153,0.2)] transition-shadow duration-500" style="transition-delay: 200ms;">
                 <div class="relative aspect-auto h-64 overflow-hidden">
-                    <img src="assets/img/dog_coding.png" alt="Dog coding" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out">
+                    <img src="assets/img/human_coding.png" alt="Human coding" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out">
                     <div class="absolute top-4 right-4 bg-purple-600 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">New</div>
                 </div>
                 <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-4 font-heading">Hacker Collie</h3>
+                    <h3 class="text-2xl font-bold mb-4 font-heading">Hacker Dave</h3>
                     <div class="flex flex-col gap-2">
                         <span class="inline-block px-4 py-2 rounded-xl text-sm font-medium bg-purple-600/10 text-purple-300 border border-purple-500/30">Offers: JavaScript/PHP</span>
                         <span class="inline-block px-4 py-2 rounded-xl text-sm font-medium bg-pink-500/10 text-pink-400 border border-pink-500/30">Wants: Arabic Lessons</span>
