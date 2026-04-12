@@ -9,6 +9,7 @@ CREATE TABLE `users` (
   `bio` text DEFAULT NULL,
   `location` varchar(255) DEFAULT NULL,
   `avg_rating` float DEFAULT 0.0,
+  `role` enum('user', 'admin') DEFAULT 'user',
   `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
