@@ -84,7 +84,6 @@
         <div class="absolute inset-0 bg-gradient-to-b from-[#0B0A10]/30 to-[#0B0A10] z-0"></div>
         
         <div class="hero-content relative z-10 max-w-4xl px-6 pt-24 pb-12 mx-auto">
-            <div class="badge inline-block px-4 py-1 rounded-full text-sm font-semibold mb-6 bg-purple-600/15 border border-purple-500/30 text-purple-400 fade-in-up">02 Portfolio Project</div>
             
             <h1 class="font-extrabold text-5xl md:text-7xl mb-6 leading-tight fade-in-up" style="transition-delay: 100ms;">Skill-Swap & <br><span class="gradient-text">Barter Network.</span></h1>
             
@@ -184,16 +183,9 @@
                 <p class="text-gray-300 leading-relaxed mb-6 text-lg">
                     SkillSwap was built to democratize learning by removing the financial friction of education. We believe everyone has a valuable skill to share, and something new they want to learn in return.
                 </p>
-                <p class="text-gray-300 leading-relaxed text-lg pb-6 border-b border-white/10 mb-6">
+                <p class="text-gray-300 leading-relaxed text-lg pb-6 ">
                     By leveraging a pure barter system, our platform allows local and global communities to uplift each other organically without ever having to touch their wallets.
                 </p>
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center text-xl font-bold">A</div>
-                    <div>
-                        <p class="font-bold font-heading text-white">Project by Asif</p>
-                        <p class="text-sm text-gray-400">Full-Stack Application</p>
-                    </div>
-                </div>
             </div>
 
             <!-- Right side tech details -->
