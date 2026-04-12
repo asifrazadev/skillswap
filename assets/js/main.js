@@ -8,13 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Scroll Reveal implementation (Intersection Observer)
     const revealElements = document.querySelectorAll('.reveal');
-    
+
     const revealOptions = {
         threshold: 0.15,
         rootMargin: "0px 0px -50px 0px"
     };
 
-    const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+    const revealOnScroll = new IntersectionObserver(function (entries, observer) {
         entries.forEach(entry => {
             if (!entry.isIntersecting) {
                 return;
@@ -32,14 +32,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mobile Menu Toggle logic
     const mobileToggle = document.querySelector('.mobile-menu-toggle');
     const header = document.querySelector('.navbar');
-    
-    if (mobileToggle) {
+
+    if (mobileToggle && header) {
         mobileToggle.addEventListener('click', () => {
             header.classList.toggle('mobile-menu-active');
-            
+
             // Animate hamburger to X
             const spans = mobileToggle.querySelectorAll('span');
-            if(header.classList.contains('mobile-menu-active')) {
+            if (header.classList.contains('mobile-menu-active')) {
                 spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
                 spans[1].style.opacity = '0';
                 spans[2].style.transform = 'rotate(-45deg) translate(7px, -7px)';

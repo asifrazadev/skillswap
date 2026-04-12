@@ -92,7 +92,6 @@
             
             <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in-up" style="transition-delay: 300ms;">
                 <button class="px-8 py-4 rounded-full text-lg font-heading font-semibold bg-gradient-to-br from-purple-600 to-pink-500 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(124,58,237,0.4)] transition-all">Start Swapping</button>
-                <button onclick="document.getElementById('architecture').scrollIntoView()" class="px-8 py-4 rounded-full text-lg font-heading font-semibold border border-white/10 hover:bg-white/5 transition-all">View Docs</button>
             </div>
         </div>
     </section>
