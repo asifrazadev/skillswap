@@ -27,50 +27,108 @@ $messagesStmt = $pdo->prepare('SELECT m.*, u.name AS sender_name FROM messages m
 $messagesStmt->execute([$swap['thread_id']]);
 $messages = $messagesStmt->fetchAll();
 
-$pageTitle = 'Swap conversation';
+$pageTitle = 'Swap chat';
 ?>
-<div class="space-y-8">
-    <div class="rounded-3xl border border-white/10 bg-[#13121A]/90 p-8 shadow-xl shadow-black/20">
-        <h1 class="text-3xl font-extrabold">Swap thread</h1>
-        <p class="mt-2 text-gray-400">Discuss the details of your swap here. Refresh after sending a message.</p>
+<div class="flex flex-col h-screen max-h-screen">
+    <!-- Header -->
+    <div class="bg-[#0B0A10] border-b border-white/10 px-4 py-3 flex items-center gap-4">
+        <a href="<?php echo BASE_URL; ?>/swaps/my_swaps.php" class="text-gray-400 hover:text-white">&larr; Back</a>
+        <div>
+            <h1 class="text-lg font-semibold">Swap Chat</h1>
+            <p class="text-sm text-gray-400"><?php echo sanitize_input(ucfirst($swap['status'])); ?> • <?php echo sanitize_input($swap['sender_id'] === $_SESSION['user_id'] ? 'You and receiver' : 'You and sender'); ?></p>
+        </div>
     </div>
 
-    <div class="rounded-3xl border border-white/10 bg-[#0D0C14]/90 p-8 shadow-lg shadow-black/20">
-        <div class="mb-6 grid gap-4 md:grid-cols-2">
-            <div>
-                <p class="text-sm text-gray-400 uppercase tracking-[0.2em]">Swap status</p>
-                <p class="mt-2 text-lg font-semibold"><?php echo sanitize_input(ucfirst($swap['status'])); ?></p>
+    <!-- Messages Area -->
+    <div id="messages-container" class="flex-1 overflow-y-auto p-4 space-y-3 bg-[#13121A]">
+        <?php if (empty($messages)): ?>
+            <div class="text-center text-gray-500 py-8">
+                <p>No messages yet. Start the conversation!</p>
             </div>
-            <div>
-                <p class="text-sm text-gray-400 uppercase tracking-[0.2em]">Participants</p>
-                <p class="mt-2 text-lg font-semibold"><?php echo sanitize_input($swap['sender_id'] === $_SESSION['user_id'] ? 'You and receiver' : 'You and sender'); ?></p>
-            </div>
-        </div>
-        <div class="space-y-4">
-            <?php if (empty($messages)): ?>
-                <p class="text-gray-400">No messages yet. Start the conversation with a short note.</p>
-            <?php else: ?>
-                <?php foreach ($messages as $message): ?>
-                    <div class="rounded-3xl border border-white/10 bg-[#13121A]/80 p-4">
-                        <div class="flex items-center justify-between gap-4 text-sm text-gray-400">
-                            <span><?php echo sanitize_input($message['sender_name']); ?></span>
-                            <span><?php echo date('M j, Y H:i', strtotime($message['sent_at'])); ?></span>
-                        </div>
-                        <p class="mt-3 text-gray-100"><?php echo nl2br(sanitize_input($message['body'])); ?></p>
+        <?php else: ?>
+            <?php foreach ($messages as $message): ?>
+                <div class="flex <?php echo $message['sender_id'] === $_SESSION['user_id'] ? 'justify-end' : 'justify-start'; ?>">
+                    <div class="max-w-xs lg:max-w-md px-4 py-2 rounded-2xl <?php echo $message['sender_id'] === $_SESSION['user_id'] ? 'bg-blue-600 text-white' : 'bg-white text-gray-900'; ?>">
+                        <p class="text-sm"><?php echo nl2br(sanitize_input($message['body'])); ?></p>
+                        <p class="text-xs mt-1 opacity-70"><?php echo date('H:i', strtotime($message['sent_at'])); ?></p>
                     </div>
-                <?php endforeach; ?>
-            <?php endif; ?>
-        </div>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 
-    <div class="rounded-3xl border border-white/10 bg-[#13121A]/90 p-8 shadow-lg shadow-black/20">
-        <h2 class="mb-4 text-xl font-semibold">Send a new message</h2>
-        <form method="post" action="<?php echo BASE_URL; ?>/messages/send.php" class="space-y-4">
+    <!-- Message Form -->
+    <div class="bg-[#0B0A10] border-t border-white/10 p-4">
+        <form id="message-form" class="flex gap-3">
             <input type="hidden" name="thread_id" value="<?php echo sanitize_input($swap['thread_id']); ?>">
             <input type="hidden" name="swap_id" value="<?php echo $swapId; ?>">
-            <textarea name="body" rows="5" class="field w-full" placeholder="Write your message..." required></textarea>
-            <button type="submit" class="button-primary">Send message</button>
+            <textarea name="body" rows="1" class="flex-1 field resize-none" placeholder="Type a message..." required></textarea>
+            <button type="submit" class="button-primary px-4 py-2">Send</button>
         </form>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const messagesContainer = document.getElementById('messages-container');
+    const messageForm = document.getElementById('message-form');
+    const threadId = <?php echo $swap['thread_id']; ?>;
+    let lastMessageId = <?php echo empty($messages) ? 0 : end($messages)['id']; ?>;
+
+    // Auto-resize textarea
+    const textarea = messageForm.querySelector('textarea');
+    textarea.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = this.scrollHeight + 'px';
+    });
+
+    // Submit form via AJAX
+    messageForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        fetch('<?php echo BASE_URL; ?>/messages/send.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(() => {
+            textarea.value = '';
+            textarea.style.height = 'auto';
+            pollMessages(); // Immediately poll for new messages
+        })
+        .catch(error => console.error('Error:', error));
+    });
+
+    // Poll for new messages
+    function pollMessages() {
+        fetch(`<?php echo BASE_URL; ?>/messages/fetch.php?thread_id=${threadId}&last_id=${lastMessageId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) return;
+            data.forEach(msg => {
+                const isOwn = msg.sender_id == <?php echo $_SESSION['user_id']; ?>;
+                const msgDiv = document.createElement('div');
+                msgDiv.className = `flex ${isOwn ? 'justify-end' : 'justify-start'}`;
+                msgDiv.innerHTML = `
+                    <div class="max-w-xs lg:max-w-md px-4 py-2 rounded-2xl ${isOwn ? 'bg-blue-600 text-white' : 'bg-white text-gray-900'}">
+                        <p class="text-sm">${msg.body.replace(/\n/g, '<br>')}</p>
+                        <p class="text-xs mt-1 opacity-70">${new Date(msg.sent_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</p>
+                    </div>
+                `;
+                messagesContainer.appendChild(msgDiv);
+                lastMessageId = msg.id;
+            });
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        })
+        .catch(error => console.error('Poll error:', error));
+    }
+
+    // Poll every 3 seconds
+    setInterval(pollMessages, 3000);
+
+    // Scroll to bottom initially
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+});
+</script>
 <?php require_once __DIR__ . '/../includes/footer.php';
+

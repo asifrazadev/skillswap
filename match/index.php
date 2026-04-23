@@ -32,16 +32,25 @@ JOIN user_skills their_want ON their_want.type = 'offered' AND their_want.skill_
 JOIN users u ON u.id = their_offer.user_id AND u.id != ?
 JOIN skills s_offer ON s_offer.id = their_offer.skill_id
 JOIN skills s_want ON s_want.id = their_want.skill_id
+WHERE NOT EXISTS (
+    SELECT 1 FROM swap_requests 
+    WHERE ((sender_id = ? AND receiver_id = u.id) OR (sender_id = u.id AND receiver_id = ?)) 
+    AND status IN ('pending', 'accepted', 'completed')
+)
+AND NOT EXISTS (
+    SELECT 1 FROM user_skills 
+    WHERE user_id = u.id AND type = 'offered' AND skill_id IN (SELECT skill_id FROM user_skills WHERE user_id = ? AND type = 'offered')
+)
 SQL;
     $stmt = $pdo->prepare($query);
-    $stmt->execute([$_SESSION['user_id'], $_SESSION['user_id'], $_SESSION['user_id']]);
+    $stmt->execute([$_SESSION['user_id'], $_SESSION['user_id'], $_SESSION['user_id'], $_SESSION['user_id'], $_SESSION['user_id'], $_SESSION['user_id']]);
     $matches = $stmt->fetchAll();
 }
 ?>
 <div class="space-y-8">
-    <div class="rounded-3xl border border-white/10 bg-[#13121A]/90 p-8 shadow-xl shadow-black/20">
-        <h1 class="mb-2 text-3xl font-extrabold">Direct Match Results</h1>
-        <p class="text-gray-400">Matching users who want what you offer and offer what you want.</p>
+    <div class="rounded-3xl border border-white/10 bg-[#13121A]/90 p-4 shadow-xl shadow-black/20">
+        <h1 class="mb-2 text-xl font-extrabold">Direct Match Results</h1>
+        <p class="text-gray-400 text-sm">Matching users who want what you offer and offer what you want.</p>
     </div>
 
     <?php if (!$offeredSkills || !$wantedSkills): ?>
@@ -57,11 +66,11 @@ SQL;
     <?php else: ?>
         <div class="grid gap-6">
             <?php foreach ($matches as $match): ?>
-                <div class="rounded-3xl border border-white/10 bg-[#0D0C14]/90 p-6 shadow-lg shadow-black/20">
+                <div class="rounded-3xl border border-white/10 bg-[#0D0C14]/90 p-4 shadow-lg shadow-black/20">
                     <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                         <div>
-                            <h2 class="text-2xl font-bold"><?php echo sanitize_input($match['user_name']); ?></h2>
-                            <p class="text-gray-400">Location: <?php echo sanitize_input($match['location'] ?: 'Unknown'); ?></p>
+                            <h2 class="text-lg font-bold"><?php echo sanitize_input($match['user_name']); ?></h2>
+                            <p class="text-gray-400 text-sm">Location: <?php echo sanitize_input($match['location'] ?: 'Unknown'); ?></p>
                             <p class="mt-2 text-sm text-gray-300">Rating: <?php echo number_format($match['avg_rating'] ?: 0,1); ?> ⭐</p>
                         </div>
                         <div class="flex flex-wrap gap-3">

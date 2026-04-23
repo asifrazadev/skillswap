@@ -27,9 +27,9 @@ $stmt->execute([$_SESSION['user_id'], $_SESSION['user_id'], $_SESSION['user_id']
 $swaps = $stmt->fetchAll();
 ?>
 <div class="space-y-8">
-    <div class="rounded-3xl border border-white/10 bg-[#13121A]/90 p-8 shadow-xl shadow-black/20">
-        <h1 class="text-3xl font-extrabold">My Swaps</h1>
-        <p class="mt-2 text-gray-400">Manage requests you sent and requests you received.</p>
+    <div class="rounded-3xl border border-white/10 bg-[#13121A]/90 p-4 shadow-xl shadow-black/20">
+        <h1 class="text-xl font-extrabold">My Swaps</h1>
+        <p class="mt-2 text-gray-400 text-sm">Manage requests you sent and requests you received.</p>
     </div>
 
     <?php if (empty($swaps)): ?>
@@ -40,12 +40,12 @@ $swaps = $stmt->fetchAll();
     <?php else: ?>
         <div class="space-y-6">
             <?php foreach ($swaps as $swap): ?>
-                <div class="rounded-3xl border border-white/10 bg-[#0D0C14]/90 p-6 shadow-lg shadow-black/20">
+                <div class="rounded-3xl border border-white/10 bg-[#0D0C14]/90 p-4 shadow-lg shadow-black/20">
                     <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                         <div>
                             <span class="badge"><?php echo sanitize_input(ucfirst($swap['status'])); ?></span>
-                            <h2 class="mt-3 text-2xl font-bold"><?php echo sanitize_input($swap['sender_id'] === $_SESSION['user_id'] ? 'You requested' : 'Request from ' . $swap['sender_name']); ?></h2>
-                            <p class="mt-2 text-gray-400">Sender offered: <?php echo sanitize_input($swap['offered_skill']); ?> • Sender wants: <?php echo sanitize_input($swap['wanted_skill']); ?></p>
+                            <h2 class="mt-3 text-xl font-bold"><?php echo sanitize_input($swap['sender_id'] === $_SESSION['user_id'] ? 'You requested' : 'Request from ' . $swap['sender_name']); ?></h2>
+                            <p class="mt-2 text-gray-400 text-sm">Sender offered: <?php echo sanitize_input($swap['offered_skill']); ?> • Sender wants: <?php echo sanitize_input($swap['wanted_skill']); ?></p>
                             <p class="mt-1 text-sm text-gray-500">Created: <?php echo date('M j, Y', strtotime($swap['created_at'])); ?></p>
                         </div>
                         <div class="flex flex-wrap gap-3">
@@ -67,11 +67,11 @@ $swaps = $stmt->fetchAll();
                     <div class="mt-6 grid gap-4 md:grid-cols-2">
                         <div class="rounded-3xl border border-white/10 bg-[#13121A]/80 p-4">
                             <p class="text-sm text-gray-400 uppercase tracking-[0.2em]">Offered by sender</p>
-                            <p class="mt-2 text-lg font-semibold"><?php echo sanitize_input($swap['offered_skill']); ?></p>
+                            <p class="mt-2 text-base font-semibold"><?php echo sanitize_input($swap['offered_skill']); ?></p>
                         </div>
                         <div class="rounded-3xl border border-white/10 bg-[#13121A]/80 p-4">
                             <p class="text-sm text-gray-400 uppercase tracking-[0.2em]">Wanted by sender</p>
-                            <p class="mt-2 text-lg font-semibold"><?php echo sanitize_input($swap['wanted_skill']); ?></p>
+                            <p class="mt-2 text-base font-semibold"><?php echo sanitize_input($swap['wanted_skill']); ?></p>
                         </div>
                     </div>
                 </div>

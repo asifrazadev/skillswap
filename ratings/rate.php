@@ -46,8 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $pageTitle = 'Rate your swap partner';
 ?>
-<div class="mx-auto max-w-3xl rounded-3xl border border-white/10 bg-[#13121A]/90 p-8 shadow-2xl shadow-black/20">
-    <h1 class="mb-3 text-3xl font-extrabold">Rate <?php echo sanitize_input($rateeName); ?></h1>
+<div class="mx-auto max-w-3xl rounded-3xl border border-white/10 bg-[#13121A]/90 p-4 shadow-2xl shadow-black/20">
+    <h1 class="mb-3 text-2xl font-extrabold">Rate <?php echo sanitize_input($rateeName); ?></h1>
     <p class="text-gray-400 mb-8">Leave a simple 1–5 rating and optional feedback.</p>
     <form method="post" class="space-y-6">
         <input type="hidden" name="swap_id" value="<?php echo $swapId; ?>">
