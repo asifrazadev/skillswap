@@ -22,6 +22,18 @@ CREATE TABLE `skills` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+INSERT INTO `skills` (`name`, `category`) VALUES
+('Web Development', 'Technology'),
+('Graphic Design', 'Creative'),
+('Spanish', 'Language'),
+('English', 'Language'),
+('Piano', 'Music'),
+('Guitar', 'Music'),
+('Photography', 'Creative'),
+('Marketing', 'Business'),
+('Excel', 'Business'),
+('Cooking', 'Lifestyle');
+
 CREATE TABLE `user_skills` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
