@@ -16,8 +16,8 @@ $wantedIds = array_column(array_filter($currentSkills, fn($row) => $row['type'] 
 
 $pageTitle = 'Edit your profile';
 ?>
-<div class="mx-auto max-w-4xl rounded-3xl border border-white/10 bg-[#13121A]/90 p-8 shadow-2xl shadow-black/20">
-    <h1 class="mb-4 text-3xl font-extrabold">Edit Profile</h1>
+<div class="mx-auto max-w-4xl rounded-3xl border border-white/10 bg-[#13121A]/90 p-4 shadow-2xl shadow-black/20">
+    <h1 class="mb-4 text-2xl font-extrabold">Edit Profile</h1>
     <form method="post" action="<?php echo BASE_URL; ?>/profile/update_skills.php" class="space-y-8">
         <div class="grid gap-6 md:grid-cols-2">
             <div>
@@ -34,9 +34,9 @@ $pageTitle = 'Edit your profile';
             <textarea name="bio" rows="5" class="field mt-2"><?php echo sanitize_input($user['bio']); ?></textarea>
         </div>
         <div class="grid gap-6 lg:grid-cols-2">
-            <div class="rounded-3xl border border-white/10 bg-[#0D0C14] p-6">
+            <div class="rounded-3xl border border-white/10 bg-[#0D0C14] p-5">
                 <h2 class="mb-4 text-lg font-semibold">I can teach</h2>
-                <div class="space-y-3 bg-blue-500">
+                <div class="space-y-3">
                     <?php foreach ($allSkills as $skill): ?>
                         <label class="flex items-center gap-3 text-gray-300">
                             <input type="checkbox" name="offered_skills[]" value="<?php echo $skill['id']; ?>" <?php echo in_array($skill['id'], $offeredIds) ? 'checked' : ''; ?> class="h-4 w-4 rounded border-white/20 bg-[#0D0C14] text-purple-500 focus:ring-purple-500">
@@ -45,7 +45,7 @@ $pageTitle = 'Edit your profile';
                     <?php endforeach; ?>
                 </div>
             </div>
-            <div class="rounded-3xl border border-white/10 bg-[#0D0C14] p-6">
+            <div class="rounded-3xl border border-white/10 bg-[#0D0C14] p-5">
                 <h2 class="mb-4 text-lg font-semibold">I want to learn</h2>
                 <div class="space-y-3">
                     <?php foreach ($allSkills as $skill): ?>

@@ -28,21 +28,24 @@ $user = current_user();
         .badge { @apply inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-2 text-xs uppercase tracking-[0.2em] text-gray-300; }
     </style>
 </head>
-<body class="min-h-screen">
+<body>
 <header class="bg-[#0B0A10] border-b border-white/10 sticky top-0 z-50">
-    <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-4">
-        <a href="<?php echo BASE_URL; ?>" class="text-2xl font-heading font-extrabold tracking-tight text-white">SkillSwap</a>
+    <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-4 py-3">
+        <a href="<?php echo BASE_URL; ?>" class="text-xl font-heading font-extrabold tracking-tight text-white">SkillSwap</a>
         <nav class="flex flex-wrap items-center gap-3 text-sm font-medium text-gray-200">
             <a href="<?php echo BASE_URL; ?>/index.php" class="hover:text-white">Home</a>
             <a href="<?php echo BASE_URL; ?>/match/index.php" class="hover:text-white">Match</a>
             <?php if ($user): ?>
                 <a href="<?php echo BASE_URL; ?>/profile/view.php" class="hover:text-white">Profile</a>
-                <a href="<?php echo BASE_URL; ?>/swaps/my_swaps.php" class="hover:text-white">My Swaps</a>
+                <a href="<?php echo BASE_URL; ?>/swaps/my_swaps.php" class="hover:text-white">Swaps</a>
             <?php endif; ?>
         </nav>
         <div class="flex flex-wrap items-center gap-3">
             <?php if ($user): ?>
-                <span class="badge"><?php echo sanitize_input($user['name']); ?></span>
+                <a href="<?php echo BASE_URL; ?>/match/index.php" class="button-primary">Dashboard</a>
+                <a href="<?php echo BASE_URL; ?>/profile/view.php" class="text-gray-300 hover:text-white" title="Profile">
+                    <i data-feather="user" class="w-5 h-5"></i>
+                </a>
                 <a href="<?php echo BASE_URL; ?>/auth/logout.php" class="button-secondary">Logout</a>
             <?php else: ?>
                 <a href="<?php echo BASE_URL; ?>/auth/login.php" class="button-secondary">Login</a>
@@ -51,7 +54,7 @@ $user = current_user();
         </div>
     </div>
 </header>
-<main class="mx-auto max-w-6xl px-6 py-8"> 
+<main class="mx-auto max-w-5xl min-h-[calc(100vh-8rem)] px-4 py-6">
     <?php if ($message = flash('success')): ?>
         <div class="mb-6 rounded-3xl border border-green-500/20 bg-green-500/10 px-6 py-4 text-green-100">
             <?php echo sanitize_input($message); ?>

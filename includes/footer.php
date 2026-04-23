@@ -1,6 +1,6 @@
 </main>
-<footer class="bg-[#0B0A10] border-t border-white/10 py-6">
-    <div class="mx-auto max-w-7xl px-6 text-center text-sm text-gray-400">
+<footer class="bg-[#0B0A10] border-t border-white/10 py-4">
+    <div class="mx-auto max-w-5xl px-4 text-center text-sm text-gray-400">
         &copy; <?php echo date('Y'); ?> SkillSwap — Simple skill trading without payments.
     </div>
 </footer>

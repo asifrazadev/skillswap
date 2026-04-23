@@ -1,3 +1,9 @@
+<?php
+require_once 'config/constants.php';
+require_once 'config/db.php';
+require_once 'includes/functions.php';
+$user = current_user();
+?>
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -67,8 +73,15 @@
         </nav>
         
         <div class="nav-actions hidden md:flex gap-4">
-            <button onclick="window.location.href='auth/login.php'" class="px-6 py-2 rounded-full border border-white/10 hover:bg-white/5 transition-all font-heading font-semibold">Log In</button>
-            <button onclick="window.location.href='auth/register.php'" class="px-6 py-2 rounded-full bg-gradient-to-br from-purple-600 to-pink-500 hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(124,58,237,0.4)] transition-all font-heading font-semibold text-white">Join Network</button>
+            <?php if ($user): ?>
+                <button onclick="window.location.href='match/index.php'" class="px-6 py-2 rounded-full bg-gradient-to-br from-purple-600 to-pink-500 hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(124,58,237,0.4)] transition-all font-heading font-semibold text-white">Dashboard</button>
+                <button onclick="window.location.href='profile/view.php'" class="px-6 py-2 rounded-full border border-white/10 hover:bg-white/5 transition-all font-heading font-semibold">
+                    <i data-feather="user" class="w-5 h-5"></i>
+                </button>
+            <?php else: ?>
+                <button onclick="window.location.href='auth/login.php'" class="px-6 py-2 rounded-full border border-white/10 hover:bg-white/5 transition-all font-heading font-semibold">Log In</button>
+                <button onclick="window.location.href='auth/register.php'" class="px-6 py-2 rounded-full bg-gradient-to-br from-purple-600 to-pink-500 hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(124,58,237,0.4)] transition-all font-heading font-semibold text-white">Join Network</button>
+            <?php endif; ?>
         </div>
         
         <!-- Mobile Menu Toggle -->
@@ -229,5 +242,7 @@
     </footer>
 
     <script src="assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" integrity="sha512-cCHIzsVZY9O/GKkPKYw1s3jQzVjhO8hb7WD4ZGwz9lD8js9cu6dGNx/nj+Gm9jWJKz+FeGtykvVQZJ+3nYw7fA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>if(window.feather){feather.replace();}</script>
 </body>
 </html>
